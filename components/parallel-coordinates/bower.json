@@ -1,0 +1,9 @@
+{
+  "name": "parallel-coordinates",
+  "version": "0.0.0",
+  "commit": "70ab59fc46f75276ee83b19defa25a75eb309262",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/syntagmatic/parallel-coordinates.git"
+  }
+}
