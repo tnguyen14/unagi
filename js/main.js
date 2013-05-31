@@ -9,6 +9,13 @@ requirejs.config({
 		log: 'console.log-wrapper/consolelog'
 	},
 	shim: {
+		"d3": {
+			exports: "d3"
+		},
+		"divgrid": {
+			deps: ['d3'],
+			exports: "divgrid"
+		},
 		"parcoords": {
 			deps: ['d3'],
 			exports: "parcoords"
@@ -23,16 +30,17 @@ require(['d3', 'dataset', 'parcoords', 'log'], function(d3, dataset, parcoords, 
 
 	console = window.console || (console = { log: function(){} });
 	// get data
-	var data = new Miso.Dataset({
+	var derived,
+		data = new Miso.Dataset({
 		url: "data/world_databank_health_indicators.csv",
 		delimiter: ","
 	});
 
 	data.fetch({
 		success: function() {
-			log(data.columnNames());
-			log(data.column("Country Code").data);
-			log(data.column("2012").data);
+			derived = data.countBy("Indicator Name", ["Country Name", "2011"]);
+			log(derived.column("Indicator Name").data);
+			log(derived.column("count").data);
 		},
 
 		error: function() {
