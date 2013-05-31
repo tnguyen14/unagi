@@ -1,0 +1,23 @@
+{
+  "name": "unagi",
+  "version": "0.0.0",
+  "description": "###Idea Visualize [Health Statistics](http://data.worldbank.org/topic/health) through [indicators](http://databank.worldbank.org/data/views/reports/tableview.aspx) collected by the World Bank using a [Parallel Coordinates system](https://github.com/syntagmatic/parallel-coordinates) with [d3](http://d3js.org/).",
+  "main": "app.js",
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "bower": "~0.9.2"
+    },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tnguyen14/unagi.git"
+  },
+  "author": "Tri Nguyen",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "cfb5920be539d3b005817938b60413d71bdb26b6"
+}
