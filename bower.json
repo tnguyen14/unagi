@@ -6,5 +6,8 @@
     "miso.dataset": "~0.4.1",
     "parallel-coordinates": "git://github.com/syntagmatic/parallel-coordinates.git",
     "requirejs": "~2.1.6"
+  },
+  "devDependencies": {
+    "console.log-wrapper": "git://github.com/cpatik/console.log-wrapper.git"
   }
 }
