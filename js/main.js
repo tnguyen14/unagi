@@ -35,7 +35,11 @@ require(['d3', 'dataset', 'parcoords', 'log'], function(d3, dataset, parcoords, 
 		data = new Miso.Dataset({
 			url: dataURI,
 			delimiter: ","
-	});
+		}),
+		parcoords = d3.parcoords()("#health-viz")
+			.alpha(0.4)
+			.height(1000)
+			.margin({top: 50, right: 10, bottom: 50, left: 10});
 
 	data.fetch({
 		success: function() {
@@ -53,10 +57,13 @@ require(['d3', 'dataset', 'parcoords', 'log'], function(d3, dataset, parcoords, 
 	var d3data = d3.csv(dataURI, function(data){
 		var processedData = rearrangeIndicatorData(data);
 		log(processedData);
-		var parcoords = d3.parcoords()("#parcoords")
+		parcoords
 			.data(processedData)
+			.brushable()
+			.mode("queue")
 			.render()
-			.createAxes();
+			.createAxes()
+			.interactive();
 	});
 
 	// Rearrange data
@@ -65,7 +72,10 @@ require(['d3', 'dataset', 'parcoords', 'log'], function(d3, dataset, parcoords, 
 			numRows = data.length,
 			// assume 214 countries
 			numCountries = 214,
-			numIndicators = Math.floor(numRows / numCountries),
+			// numIndicators = Math.floor(numRows / numCountries),
+			// limit to 10 for now
+			// @TODO: create a way to add/ remove columns
+			numIndicators = 10,
 			years = ["2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012"];
 
 
@@ -77,7 +87,7 @@ require(['d3', 'dataset', 'parcoords', 'log'], function(d3, dataset, parcoords, 
 				row["Country Code"] = data[i]["Country Code"];
 				for (var k = 0; k < numIndicators; k++) {
 					rowIndex = i + (k * numCountries);
-					row[data[rowIndex]["Indicator Name"]] = data[rowIndex][years[j]];
+					row[data[rowIndex]["Indicator Name"]] = +data[rowIndex][years[j]];
 				}
 				row["Year"] = years[j];
 				d.push(row);
