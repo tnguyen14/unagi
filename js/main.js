@@ -36,17 +36,17 @@ require(['d3', 'dataset', 'parcoords', 'log'], function(d3, dataset, parcoords, 
 			url: dataURI,
 			delimiter: ","
 		}),
+		// initialize `parcoords`
 		parcoords = d3.parcoords()("#health-viz")
 			.alpha(0.4)
 			.height(1000)
 			.margin({top: 50, right: 10, bottom: 50, left: 10});
 
+	// get data using Miso dataset
 	data.fetch({
 		success: function() {
 			derived = data.countBy("Indicator Name", ["Country Name", "2011"]);
-			log(derived.column("count").data);
-			// derived2 = data.groupBy("Indicator Name", ["Country Name", "2011"]);
-			// log(derived2);
+			// log(derived.column("count").data);
 		},
 
 		error: function() {
@@ -54,6 +54,7 @@ require(['d3', 'dataset', 'parcoords', 'log'], function(d3, dataset, parcoords, 
 		}
 	});
 
+	// get data using d3
 	var d3data = d3.csv(dataURI, function(data){
 		var processedData = rearrangeIndicatorData(data);
 		log(processedData);
@@ -66,6 +67,15 @@ require(['d3', 'dataset', 'parcoords', 'log'], function(d3, dataset, parcoords, 
 			.interactive();
 	});
 
+	/*
+	Original data format
+	Indicator Name | Indicator Code | Country Name | Country Code | 2003 | 2004 | 2005 | ... | 2011 | 2012
+
+	each indicator will have 214 rows for 214 countries
+
+	Rearranged data format
+	Country Name | Country Code | Year | Indicator1 | Indicator2 | Indicator3 | ... | Indicator-n
+	*/
 	// Rearrange data
 	var rearrangeIndicatorData = function(data){
 		var d = [],
@@ -78,18 +88,20 @@ require(['d3', 'dataset', 'parcoords', 'log'], function(d3, dataset, parcoords, 
 			numIndicators = 10,
 			years = ["2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012"];
 
-
+		// loop through each country
 		for (var i = 0; i < numCountries; i++) {
 			// loop through each year
 			for (var j = 0; j < years.length; j++) {
 				var row = {};
 				row["Country Name"] = data[i]["Country Name"];
 				row["Country Code"] = data[i]["Country Code"];
+				row["Year"] = years[j];
+				// loop through each indicator
 				for (var k = 0; k < numIndicators; k++) {
 					rowIndex = i + (k * numCountries);
-					row[data[rowIndex]["Indicator Name"]] = +data[rowIndex][years[j]];
+					indicator = data[rowIndex]["Indicator Name"];
+					row[indicator] = data[rowIndex][years[j]];
 				}
-				row["Year"] = years[j];
 				d.push(row);
 			}
 		}
