@@ -77,16 +77,18 @@ require(['d3', 'dataset', 'parcoords', 'log'], function(d3, dataset, parcoords, 
 	Rearranged data format
 	Country Name | Country Code | Year | Indicator1 | Indicator2 | Indicator3 | ... | Indicator-n
 	*/
-	// Rearrange data
 	var rearrangeIndicatorData = function(data){
 		var d = [],
 			numRows = data.length,
 			// assume 214 countries
-			numCountries = 214,
+			// numCountries = 214,
+			// for now, only work with a smaller subset of countries
+			numCountries = 50,
+			totalCountries = 214,
 			// numIndicators = Math.floor(numRows / numCountries),
 			// limit to 10 for now
 			// @TODO: create a way to add/ remove columns
-			numIndicators = 10,
+			numIndicators = 5,
 			years = ["2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012"];
 
 		// loop through each country
