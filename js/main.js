@@ -60,14 +60,15 @@ require(['d3', 'dataset', 'parcoords', 'log'], function(d3, dataset, parcoords, 
 		log(processedData);
 		parcoords
 			.data(processedData)
-			.brushable()
 			.mode("queue")
 			.render()
 			.createAxes()
-			.interactive();
+			.brushable();
 	});
 
 	/*
+	Rearrange data
+
 	Original data format
 	Indicator Name | Indicator Code | Country Name | Country Code | 2003 | 2004 | 2005 | ... | 2011 | 2012
 
