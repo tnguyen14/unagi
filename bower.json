@@ -6,7 +6,9 @@
     "miso.dataset": "~0.4.1",
     "parallel-coordinates": "git://github.com/syntagmatic/parallel-coordinates.git",
     "requirejs": "~2.1.6",
-    "slickgrid": "~2.0.2"
+    "slickgrid": "~2.0.2",
+    "jquery": "~2.0.2",
+    "jquery-ui": "~1.10.3"
   },
   "devDependencies": {
     "console.log-wrapper": "git://github.com/cpatik/console.log-wrapper.git"

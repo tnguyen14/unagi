@@ -1,0 +1,7 @@
+.parcoords > svg {
+	position: relative;
+}
+
+#grid {
+	height: 500px;
+}
