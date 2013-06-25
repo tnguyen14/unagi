@@ -97,12 +97,12 @@ require(['d3', 'dataset', 'parcoords', 'log'], function(d3, dataset, parcoords, 
 			for (var j = 0; j < years.length; j++) {
 				var row = {};
 				row["Country Name"] = data[i]["Country Name"];
-				row["Country Code"] = data[i]["Country Code"];
+				// row["Country Code"] = data[i]["Country Code"];
 				row["Year"] = years[j];
 				// loop through each indicator
 				for (var k = 0; k < numIndicators; k++) {
-					rowIndex = i + (k * numCountries);
-					indicator = data[rowIndex]["Indicator Name"];
+					rowIndex = i + (k * totalCountries);
+					indicator = data[rowIndex]["Indicator Code"];
 					row[indicator] = data[rowIndex][years[j]];
 				}
 				d.push(row);
