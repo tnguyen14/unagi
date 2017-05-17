@@ -1,4 +1,6 @@
 ## Tri's Data Viz Project at Upstatement
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/tnguyen14/unagi.svg)](https://greenkeeper.io/)
 This is an **experimental** project to use [d3.js](http://d3js.org/) and other libraries to visualize health indicator data.
 
 ### Idea
